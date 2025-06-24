@@ -22,3 +22,4 @@ MAX_DEPTH_DT=5
 MIN_SAMPLES_SPLIT_DT = 10
 LOG_DIR = "logs"
 IMAGES_DIR = "images"
+MODELS_PATH = "models"

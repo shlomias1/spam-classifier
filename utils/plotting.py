@@ -18,13 +18,20 @@ def save_confusion_matrix(y_true, y_pred, labels, path):
 
 def plot_loss_trace(entropy_values, path, title):
     os.makedirs(IMAGES_DIR, exist_ok=True)
-    path = os.path.join(IMAGES_DIR, path)    
-    plt.figure()
-    plt.plot(entropy_values, marker='o')
+    full_path = os.path.join(IMAGES_DIR, path)
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(entropy_values, marker='o', linestyle='-', color='tab:blue', label='Entropy')
+
+    min_idx = entropy_values.index(min(entropy_values))
+    min_val = min(entropy_values)
+    plt.scatter(min_idx, min_val, color='red', zorder=5, label=f'Min Entropy ({min_val:.2f})')
+
     plt.title(title)
     plt.xlabel("Split Step")
-    plt.ylabel("Entropy")
-    plt.grid(True)
+    plt.ylabel("loss")
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.legend()
     plt.tight_layout()
-    plt.savefig(path)
+    plt.savefig(full_path, dpi=300)
     plt.close()
