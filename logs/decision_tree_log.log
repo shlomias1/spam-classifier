@@ -60,3 +60,5 @@ info :          precision    recall  f1-score   support
    macro avg       0.98      0.91      0.94      1115
 weighted avg       0.98      0.98      0.97      1115
  | 2025-06-24 13:43:06 
+info : Starting decision tree training... | 2025-06-24 21:04:49 
+info : Fitting model... | 2025-06-24 21:04:49 

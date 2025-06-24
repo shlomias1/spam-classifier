@@ -35,3 +35,19 @@ def plot_loss_trace(entropy_values, path, title):
     plt.tight_layout()
     plt.savefig(full_path, dpi=300)
     plt.close()
+
+def plot_depth_sensitivity(results_array, path):
+    os.makedirs(IMAGES_DIR, exist_ok=True)
+    full_path = os.path.join(IMAGES_DIR, path)
+    
+    plt.figure(figsize=(10, 6))
+    plt.plot(results_array[:, 0], results_array[:, 1], label='Precision')
+    plt.plot(results_array[:, 0], results_array[:, 2], label='Recall')
+    plt.plot(results_array[:, 0], results_array[:, 3], label='F1 Score')
+    plt.xlabel("Max Depth")
+    plt.ylabel("Score")
+    plt.title("Precision / Recall / F1 vs. Max Depth")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()

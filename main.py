@@ -1,10 +1,9 @@
 import feature_extraction
 import processing
 import data_io
-from sklearn.metrics import accuracy_score, classification_report
-
+from model_tester import check_depth_sensitivity
 from model_runner import run_decision_tree_pipeline
-import config
+from sklearn_runner_DT import sklearn_model_DT
 import os
 
 def pipeline():
@@ -15,6 +14,8 @@ def pipeline():
     data_io.save_processed_data(X_train, X_test, y_train, y_test, tfidf_vectorizer, filename_prefix='data/processed_data')
     if not os.path.isfile("models/decision_tree_model.pkl"):
         run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=["ham", "spam"])
+        check_depth_sensitivity(X_train, X_test, y_train, y_test)
+        sklearn_model_DT(X_train, X_test, y_train, y_test, target_names=["ham", "spam"], output_dir="models/sklearn_decision_tree_model.pkl")
 
 if __name__ == "__main__":
     pipeline()
