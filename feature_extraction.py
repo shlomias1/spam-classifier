@@ -3,7 +3,7 @@ import string
 import re
 import numpy as np
 
-from data_io import spam_data, save_processed_data
+from data_io import load_data
 import config
 
 def clean_text(text):
@@ -15,6 +15,7 @@ def count_suspicious_bigrams(text):
     return sum(1 for bigram in config.suspicious_bigrams if bigram in text)
 
 def preprocessing():
+    spam_data = load_data('data/spam.csv')
     # Selecting relevant columns and combining them into a single message column
     columns_to_join = ['v2', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4']
     existing_columns = [col for col in columns_to_join if col in spam_data.columns]
@@ -40,7 +41,7 @@ def preprocessing():
     keywords = config.keywords
     spam_data['has_keyword'] = spam_data['cleaned'].apply(
         lambda x: any(word in x for word in keywords)
-    )
+    ).astype(int)
 
     # new feature - number of uppercase words
     spam_data['num_uppercase'] = spam_data['message'].apply(lambda x: sum(1 for w in x.split() if w.isupper()))
@@ -51,11 +52,9 @@ def preprocessing():
 
     # Presence of question/command words
     question_words = config.question_words
-    spam_data['has_question_word'] = spam_data['cleaned'].apply(lambda x: any(w in x.split() for w in question_words))
+    spam_data['has_question_word'] = spam_data['cleaned'].apply(lambda x: any(w in x.split() for w in question_words)).astype(int)
     spam_data['has_question_mark'] = spam_data['message'].apply(lambda x: '?' in x).astype(int)
 
     # Does the message end with a word like "stop" (common in spam)
     spam_data['ends_with_stop'] = spam_data['cleaned'].apply(lambda x: x.strip().endswith('stop')).astype(int)
     return spam_data
-
-save_processed_data(X_train, X_test, y_train, y_test, tfidf, filename_prefix='data/processed_data')
