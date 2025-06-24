@@ -17,3 +17,6 @@ SELECTED_FEATURES = [
     'has_question_mark',
     'ends_with_stop'
 ]
+
+MAX_DEPTH_DT=5 
+MIN_SAMPLES_SPLIT_DT = 10
