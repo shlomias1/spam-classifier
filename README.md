@@ -91,6 +91,4 @@ Created by [shlomias1](https://github.com/shlomias1)
 
 This project is open-source and free to use under the [MIT License](LICENSE).
 
-```
-
 ---
