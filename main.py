@@ -9,13 +9,14 @@ import os
 def pipeline():
     spam_data = feature_extraction.preprocessing()
     data_io.save_to_csv(spam_data)
-    X_all, tfidf_vectorizer = processing.tf_idf_vectorization(spam_data)
+    X_all, tfidf_vectorizer, feature_names = processing.tf_idf_vectorization(spam_data)
     X_train, X_test, y_train, y_test = processing.split(spam_data, X_all)
     data_io.save_processed_data(X_train, X_test, y_train, y_test, tfidf_vectorizer, filename_prefix='data/processed_data')
-    if not os.path.isfile("models/decision_tree_model.pkl"):
-        run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=["ham", "spam"])
-        check_depth_sensitivity(X_train, X_test, y_train, y_test)
-        sklearn_model_DT(X_train, X_test, y_train, y_test, target_names=["ham", "spam"], output_dir="models/sklearn_decision_tree_model.pkl")
-
+    # if not os.path.isfile("models/decision_tree_model.pkl"):
+    #     run_decision_tree_pipeline(X_train, X_test, y_train, y_test, ["ham", "spam"], feature_names)
+    #     check_depth_sensitivity(X_train, X_test, y_train, y_test)
+    #     sklearn_model_DT(X_train, X_test, y_train, y_test, target_names=["ham", "spam"], output_dir="models/sklearn_decision_tree_model.pkl")
+    run_decision_tree_pipeline(X_train, X_test, y_train, y_test, ["ham", "spam"], feature_names)
+    
 if __name__ == "__main__":
     pipeline()

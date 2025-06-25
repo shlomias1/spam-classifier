@@ -1,5 +1,6 @@
 import numpy as np
 from utils.logger import _create_log
+from collections import Counter
 
 class DecisionTreeClassifier:
     def __init__(self, max_depth=5, min_samples_split=2, min_gain=1e-7, verbose=False):
@@ -11,6 +12,8 @@ class DecisionTreeClassifier:
         self.entropy_trace = []
 
     def fit(self, X, y):
+        if hasattr(X, "toarray"):
+            X = X.toarray()
         self.tree_ = self._build_tree(X, y)
 
     def predict(self, X):
@@ -76,16 +79,34 @@ class DecisionTreeClassifier:
         else:
             return self._predict_one(x, tree['right'])
 
-    def print_tree(self, tree=None, depth=0):
+    def print_tree(self, tree=None, depth=0, feature_names=None):
         if tree is None:
             tree = self.tree_
 
         indent = "  " * depth
         if tree['leaf']:
-            _create_log(f"{indent}Leaf: class = {tree['class']}","info","decision_tree_log.log")
+            _create_log(f"{indent}Leaf: class = {tree['class']}", "info", "decision_tree_log.log")
         else:
-            feature = tree['feature']
+            feature_idx = tree['feature']
             threshold = tree['threshold']
-            _create_log(f"{indent}Node: feature = X[{feature}], threshold = {threshold}","info","decision_tree_log.log")
-            self.print_tree(tree['left'], depth + 1)
-            self.print_tree(tree['right'], depth + 1)
+            feature_label = (
+                feature_names[feature_idx] if feature_names and feature_idx < len(feature_names)
+                else f"X[{feature_idx}]"
+            )
+            _create_log(f"{indent}Node: feature = {feature_label}, threshold = {threshold}", "info", "decision_tree_log.log")
+            self.print_tree(tree['left'], depth + 1, feature_names)
+            self.print_tree(tree['right'], depth + 1, feature_names)
+    
+    def compute_feature_importance(self):
+        counter = Counter()
+
+        def recurse(node):
+            if node['leaf']:
+                return
+            feature = node['feature']
+            counter[feature] += 1
+            recurse(node['left'])
+            recurse(node['right'])
+
+        recurse(self.tree_)
+        return counter

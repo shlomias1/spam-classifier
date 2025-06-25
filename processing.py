@@ -15,7 +15,10 @@ def tf_idf_vectorization(data):
     X_manual = data[config.SELECTED_FEATURES].astype(float).values
     # Final design matrix
     X_all = hstack([X_tfidf, X_manual])
-    return X_all, tfidf
+    tfidf_feature_names = tfidf.get_feature_names_out()
+    manual_features = config.SELECTED_FEATURES
+    all_feature_names = list(tfidf_feature_names) + manual_features
+    return X_all, tfidf, all_feature_names
 
 def split(data, X_all):
     # splitting the dataset into training and testing sets

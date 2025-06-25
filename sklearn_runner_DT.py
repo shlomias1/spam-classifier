@@ -7,12 +7,15 @@ from utils.plotting import save_confusion_matrix
 import numpy as np
 import config
 from data_io import save_model
+from processing import to_ndarray
 
 def sklearn_model_DT(X_train, X_test, y_train, y_test, target_names=None, output_dir="output"):
     _create_log("Running sklearn DecisionTreeClassifier...", "info", "sklearn_dt.log")
 
     # Train sklearn model
     clf = SklearnDT(max_depth=config.MAX_DEPTH_DT, min_samples_split=config.MIN_SAMPLES_SPLIT_DT, random_state=42)
+    X_train = to_ndarray(X_train)
+    X_test = to_ndarray(X_test)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 

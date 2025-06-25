@@ -18,7 +18,7 @@ SELECTED_FEATURES = [
     'ends_with_stop'
 ]
 
-MAX_DEPTH_DT=5 
+MAX_DEPTH_DT = 6
 MIN_SAMPLES_SPLIT_DT = 20
 LOG_DIR = "logs"
 IMAGES_DIR = "images"

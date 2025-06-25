@@ -50,4 +50,18 @@ def plot_depth_sensitivity(results_array, path):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
+    plt.savefig(full_path, dpi=300)
+    plt.show()
+
+def plot_feature_importance(counter, feature_names, output_path, top_n=10):
+    top_features  = counter.most_common(top_n)
+    indices = [idx for idx, _ in top_features]
+    labels = [feature_names[i] for i in indices]
+    values = [count for _, count in top_features]
+    plt.figure(figsize=(10, 6))
+    plt.barh(labels[::-1], values[::-1], color='skyblue')
+    plt.title("Top Feature Importances (by split count)")
+    plt.xlabel("Split Count")
+    plt.tight_layout()
+    plt.savefig(output_path)
     plt.show()

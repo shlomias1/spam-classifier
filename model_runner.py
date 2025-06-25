@@ -2,11 +2,11 @@ from sklearn.metrics import accuracy_score, classification_report
 from decision_tree import DecisionTreeClassifier
 from processing import to_ndarray
 import config
-from utils.plotting import save_confusion_matrix, plot_loss_trace
+from utils.plotting import save_confusion_matrix, plot_loss_trace, plot_feature_importance
 from utils.logger import _create_log
 from data_io import save_model
 
-def run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=None):
+def run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=None, feature_names=None):
     _create_log("Starting decision tree training...","info","decision_tree_log.log")
     X_train = to_ndarray(X_train)
     X_test = to_ndarray(X_test)
@@ -20,7 +20,11 @@ def run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=No
     tree.fit(X_train, y_train)
     
     _create_log("Tree structure: ","info","decision_tree_log.log")
-    tree.print_tree()
+    tree.print_tree(feature_names)
+    counter = tree.compute_feature_importance()
+    plot_feature_importance(counter, feature_names, output_path="feature_importance_DT.png")
+    for idx, count in counter.most_common(10):
+        _create_log(f"Feature X[{idx}] used {count} times in splits", "info", "decision_tree_log.log")
 
     y_pred = tree.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
