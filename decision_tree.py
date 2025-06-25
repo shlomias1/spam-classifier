@@ -79,7 +79,7 @@ class DecisionTreeClassifier:
         else:
             return self._predict_one(x, tree['right'])
 
-    def print_tree(self, tree=None, depth=0, feature_names=None):
+    def print_tree(self, feature_names,tree=None, depth=0):
         if tree is None:
             tree = self.tree_
 
@@ -94,8 +94,8 @@ class DecisionTreeClassifier:
                 else f"X[{feature_idx}]"
             )
             _create_log(f"{indent}Node: feature = {feature_label}, threshold = {threshold}", "info", "decision_tree_log.log")
-            self.print_tree(tree['left'], depth + 1, feature_names)
-            self.print_tree(tree['right'], depth + 1, feature_names)
+            self.print_tree(feature_names, tree['left'], depth + 1)
+            self.print_tree(feature_names, tree['right'], depth + 1)
     
     def compute_feature_importance(self):
         counter = Counter()

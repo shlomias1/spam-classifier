@@ -16,7 +16,7 @@ def pipeline():
     #     run_decision_tree_pipeline(X_train, X_test, y_train, y_test, ["ham", "spam"], feature_names)
     #     check_depth_sensitivity(X_train, X_test, y_train, y_test)
     #     sklearn_model_DT(X_train, X_test, y_train, y_test, target_names=["ham", "spam"], output_dir="models/sklearn_decision_tree_model.pkl")
-    run_decision_tree_pipeline(X_train, X_test, y_train, y_test, ["ham", "spam"], feature_names)
+    run_decision_tree_pipeline(X_train, X_test, y_train, y_test, ["ham", "spam"], feature_names=feature_names)
     
 if __name__ == "__main__":
     pipeline()

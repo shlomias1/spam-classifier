@@ -92,3 +92,7 @@ Created by [shlomias1](https://github.com/shlomias1)
 This project is open-source and free to use under the [MIT License](LICENSE).
 
 ---
+=======
+# spam-classifier
+Classify SMS messages as spam or not
+>>>>>>> 3214a182d91863b847e19964e5aefff7019cfbc4

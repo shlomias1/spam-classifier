@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from scipy.sparse import hstack
+from scipy.sparse import hstack, csr_matrix
 import numpy as np
 
 import config
@@ -21,13 +21,20 @@ def tf_idf_vectorization(data):
     return X_all, tfidf, all_feature_names
 
 def split(data, X_all):
-    # splitting the dataset into training and testing sets
+    data['label'] = data['label'].str.strip().str.lower()
     y = data['label'].map({'ham': 0, 'spam': 1})
-    X_train, X_test, y_train, y_test = train_test_split(X_all, y, stratify=y, test_size=0.2, random_state=42)
+    valid_indices = y.notna()
+    y = y[valid_indices].reset_index(drop=True)
+    if not isinstance(X_all, csr_matrix):
+        X_all = X_all.tocsr()
+    X_all = X_all[valid_indices.values]
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_all, y, stratify=y, test_size=0.2, random_state=42
+    )
     return X_train, X_test, y_train, y_test
 
 def to_ndarray(X):
     if not isinstance(X, np.ndarray):
         return X.toarray()
     else:
-        return X 
+        return X
