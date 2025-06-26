@@ -1,5 +1,6 @@
 from sklearn.metrics import accuracy_score, classification_report
 from decision_tree import DecisionTreeClassifier
+from random_forest import RandomForestClassifier
 from processing import to_ndarray
 import config
 from utils.plotting import save_confusion_matrix, plot_loss_trace, plot_feature_importance
@@ -38,3 +39,34 @@ def run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=No
     _create_log(classification_report(y_test, y_pred, target_names=target_names or ["class 0", "class 1"]),"info","decision_tree_log.log")
     
     save_model(tree, "models/decision_tree_model.pkl")
+
+def run_random_forest_pipeline(X_train, X_test, y_train, y_test, target_names=None, feature_names=None):
+    _create_log("Starting Random Forest training...", "info", "random_forest_log.log")
+    
+    X_train = to_ndarray(X_train)
+    X_test = to_ndarray(X_test)
+
+    forest = RandomForestClassifier(
+        n_estimators=config.N_ESTIMATORS_RF,
+        max_depth=config.MAX_DEPTH_RF,
+        min_samples_split=config.MIN_SAMPLES_SPLIT_RF,
+        max_features=config.MAX_FEATURES_RF,
+        verbose=True
+    )
+
+    _create_log("Fitting Random Forest model...", "info", "random_forest_log.log")
+    forest.fit(X_train, y_train)
+
+    _create_log("Predicting on test set...", "info", "random_forest_log.log")
+    y_pred = forest.predict(X_test)
+
+    acc = accuracy_score(y_test, y_pred)
+    _create_log(f"Accuracy: {acc:.4f}", "info", "random_forest_log.log")
+    _create_log("Classification report:\n" +
+                classification_report(y_test, y_pred, target_names=target_names or ["class 0", "class 1"]),
+                "info", "random_forest_log.log")
+
+    save_confusion_matrix(y_test, y_pred, labels=target_names or ["class 0", "class 1"],
+                          path="confusion_matrix_RF.png")
+
+    save_model(forest, "models/random_forest_model.pkl")

@@ -99,7 +99,6 @@ class DecisionTreeClassifier:
     
     def compute_feature_importance(self):
         counter = Counter()
-
         def recurse(node):
             if node['leaf']:
                 return
@@ -107,6 +106,5 @@ class DecisionTreeClassifier:
             counter[feature] += 1
             recurse(node['left'])
             recurse(node['right'])
-
         recurse(self.tree_)
         return counter
