@@ -15,8 +15,12 @@ SELECTED_FEATURES = [
     'num_digits',
     'has_question_word',
     'has_question_mark',
-    'ends_with_stop'
+    'ends_with_stop',
+    'has_phone_number',
+    'has_marketing_intro'
 ]
+
+marketing_intro = ['congratulations', 'limited', 'offer', 'exclusive']
 
 MAX_DEPTH_DT = 6
 MIN_SAMPLES_SPLIT_DT = 20

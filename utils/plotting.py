@@ -19,14 +19,11 @@ def save_confusion_matrix(y_true, y_pred, labels, path):
 def plot_loss_trace(entropy_values, path, title):
     os.makedirs(IMAGES_DIR, exist_ok=True)
     full_path = os.path.join(IMAGES_DIR, path)
-
     plt.figure(figsize=(10, 6))
     plt.plot(entropy_values, marker='o', linestyle='-', color='tab:blue', label='Entropy')
-
     min_idx = entropy_values.index(min(entropy_values))
     min_val = min(entropy_values)
     plt.scatter(min_idx, min_val, color='red', zorder=5, label=f'Min Entropy ({min_val:.2f})')
-
     plt.title(title)
     plt.xlabel("Split Step")
     plt.ylabel("loss")
@@ -39,7 +36,6 @@ def plot_loss_trace(entropy_values, path, title):
 def plot_depth_sensitivity(results_array, path):
     os.makedirs(IMAGES_DIR, exist_ok=True)
     full_path = os.path.join(IMAGES_DIR, path)
-    
     plt.figure(figsize=(10, 6))
     plt.plot(results_array[:, 0], results_array[:, 1], label='Precision')
     plt.plot(results_array[:, 0], results_array[:, 2], label='Recall')
@@ -51,9 +47,11 @@ def plot_depth_sensitivity(results_array, path):
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(full_path, dpi=300)
-    plt.show()
+    plt.close()
 
 def plot_feature_importance(counter, feature_names, output_path, top_n=10):
+    os.makedirs(IMAGES_DIR, exist_ok=True)
+    full_path = os.path.join(IMAGES_DIR, output_path)
     top_features  = counter.most_common(top_n)
     indices = [idx for idx, _ in top_features]
     labels = [feature_names[i] for i in indices]
@@ -63,5 +61,5 @@ def plot_feature_importance(counter, feature_names, output_path, top_n=10):
     plt.title("Top Feature Importances (by split count)")
     plt.xlabel("Split Count")
     plt.tight_layout()
-    plt.savefig(output_path)
-    plt.show()
+    plt.savefig(full_path)
+    plt.close()

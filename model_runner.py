@@ -24,7 +24,8 @@ def run_decision_tree_pipeline(X_train, X_test, y_train, y_test, target_names=No
     counter = tree.compute_feature_importance()
     plot_feature_importance(counter, feature_names, output_path="feature_importance_DT.png")
     for idx, count in counter.most_common(10):
-        _create_log(f"Feature X[{idx}] used {count} times in splits", "info", "decision_tree_log.log")
+        feature_label = feature_names[idx] if idx < len(feature_names) else f"X[{idx}]"
+        _create_log(f"Feature '{feature_label}' used {count} times in splits", "info", "decision_tree_log.log")
 
     y_pred = tree.predict(X_test)
     acc = accuracy_score(y_test, y_pred)

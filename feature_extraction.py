@@ -57,4 +57,12 @@ def preprocessing():
 
     # Does the message end with a word like "stop" (common in spam)
     spam_data['ends_with_stop'] = spam_data['cleaned'].apply(lambda x: x.strip().endswith('stop')).astype(int)
+    
+    # Does the message contain a phone number
+    spam_data['has_phone_number'] = spam_data['message'].str.contains(r'\b(?:\+?\d{1,3})?[ -.]?\(?\d{2,4}\)?[ -.]?\d{3,4}[ -.]?\d{4}\b').astype(int)
+    
+    # Does the message contain a marketing intro
+    spam_data['has_marketing_intro'] = spam_data['cleaned'].str[:30].apply(
+        lambda x: any(word in x for word in ['congratulations', 'limited', 'offer', 'exclusive'])
+    ).astype(int)
     return spam_data
