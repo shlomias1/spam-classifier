@@ -9,3 +9,14 @@ info : Sklearn Accuracy: 0.9667
    macro avg       0.97      0.91      0.94      1260
 weighted avg       0.97      0.97      0.97      1260
  | 2025-06-26 13:46:19 
+info : Running sklearn DecisionTreeClassifier... | 2025-06-26 15:22:02 
+info : Sklearn Accuracy: 0.9690
+              precision    recall  f1-score   support
+
+         ham       0.97      0.99      0.98      1054
+        spam       0.94      0.87      0.90       206
+
+    accuracy                           0.97      1260
+   macro avg       0.96      0.93      0.94      1260
+weighted avg       0.97      0.97      0.97      1260
+ | 2025-06-26 15:22:02 

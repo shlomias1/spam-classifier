@@ -3226,3 +3226,16 @@ info : Classification report:
    macro avg       0.98      0.90      0.93      1260
 weighted avg       0.97      0.97      0.97      1260
  | 2025-06-26 15:07:02 
+info : Starting Random Forest training... | 2025-06-26 15:22:03 
+info : Fitting Random Forest model... | 2025-06-26 15:22:03 
+info : Trained tree 1/200 with 6 features: ['has_question_mark', 'num_words', 'has_question_word', 'num_exclamations', 'has_keyword', 'has_phone_number'] | 2025-06-26 15:22:08 
+info : Trained tree 2/200 with 6 features: ['count_suspicious_bigrams', 'num_words', 'num_exclamations', 'ends_with_stop', 'has_question_word', 'num_uppercase'] | 2025-06-26 15:22:14 
+info : Trained tree 3/200 with 6 features: ['num_digits', 'has_keyword', 'count_suspicious_bigrams', 'has_question_word', 'ends_with_stop', 'num_words'] | 2025-06-26 15:22:19 
+info : Trained tree 4/200 with 6 features: ['num_words', 'has_phone_number', 'num_uppercase', 'has_question_word', 'has_keyword', 'num_exclamations'] | 2025-06-26 15:22:22 
+info : Trained tree 5/200 with 6 features: ['num_uppercase', 'num_digits', 'has_marketing_intro', 'count_suspicious_bigrams', 'ends_with_stop', 'has_question_word'] | 2025-06-26 15:22:27 
+info : Trained tree 6/200 with 6 features: ['has_keyword', 'num_words', 'count_suspicious_bigrams', 'num_uppercase', 'has_phone_number', 'ends_with_stop'] | 2025-06-26 15:22:31 
+info : Trained tree 7/200 with 6 features: ['count_suspicious_bigrams', 'has_marketing_intro', 'num_words', 'has_keyword', 'num_uppercase', 'has_question_mark'] | 2025-06-26 15:22:40 
+info : Trained tree 8/200 with 6 features: ['has_keyword', 'ends_with_stop', 'has_question_word', 'has_marketing_intro', 'num_exclamations', 'has_phone_number'] | 2025-06-26 15:22:43 
+info : Trained tree 9/200 with 6 features: ['num_uppercase', 'has_question_mark', 'has_phone_number', 'num_digits', 'num_exclamations', 'has_question_word'] | 2025-06-26 15:22:47 
+info : Trained tree 10/200 with 6 features: ['has_marketing_intro', 'num_digits', 'num_uppercase', 'has_phone_number', 'has_question_mark', 'has_question_word'] | 2025-06-26 15:22:52 
+info : Trained tree 11/200 with 6 features: ['num_words', 'count_suspicious_bigrams', 'num_digits', 'has_question_mark', 'has_keyword', 'has_phone_number'] | 2025-06-26 15:22:57 

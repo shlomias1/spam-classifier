@@ -38,6 +38,9 @@ MAX_DEPTH_RF = 10
 MIN_SAMPLES_SPLIT_RF = 20
 MAX_FEATURES_RF = math.ceil(0.5 * len(SELECTED_FEATURES))
 
+# ===== Random Forest =====
+N_ESTIMATORS_ADABOOST = 200
+
 # ===== file management =====
 LOG_DIR = "logs"
 IMAGES_DIR = "images"

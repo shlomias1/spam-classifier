@@ -83,3 +83,84 @@ info :               precision    recall  f1-score   support
    macro avg       0.97      0.91      0.94      1260
 weighted avg       0.97      0.97      0.97      1260
  | 2025-06-26 13:46:11 
+info : Starting decision tree training... | 2025-06-26 15:21:29 
+info : Fitting model... | 2025-06-26 15:21:29 
+info : Tree structure:  | 2025-06-26 15:21:57 
+info : Node: feature = num_digits, threshold = 1.0 | 2025-06-26 15:21:57 
+info :   Node: feature = num_digits, threshold = 0.0 | 2025-06-26 15:21:57 
+info :     Node: feature = num_exclamations, threshold = 0.0 | 2025-06-26 15:21:57 
+info :       Node: feature = count_suspicious_bigrams, threshold = 0.0 | 2025-06-26 15:21:57 
+info :         Node: feature = num_words, threshold = 19.0 | 2025-06-26 15:21:57 
+info :           Node: feature = num_uppercase, threshold = 1.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:57 
+info :           Node: feature = has_question_mark, threshold = 0.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:57 
+info :         Leaf: class = 1.0 | 2025-06-26 15:21:57 
+info :       Node: feature = num_exclamations, threshold = 0.9901724474302122 | 2025-06-26 15:21:57 
+info :         Leaf: class = 1.0 | 2025-06-26 15:21:57 
+info :         Node: feature = ends_with_stop, threshold = 0.0 | 2025-06-26 15:21:57 
+info :           Node: feature = num_words, threshold = 11.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:57 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :           Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :     Node: feature = num_digits, threshold = 0.9825017860126114 | 2025-06-26 15:21:58 
+info :       Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :       Node: feature = has_phone_number, threshold = 0.0 | 2025-06-26 15:21:58 
+info :         Node: feature = num_uppercase, threshold = 1.0 | 2025-06-26 15:21:58 
+info :           Node: feature = has_keyword, threshold = 0.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :           Node: feature = has_keyword, threshold = 0.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :         Node: feature = num_uppercase, threshold = 2.6090839992632002 | 2025-06-26 15:21:58 
+info :           Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :           Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :   Node: feature = has_keyword, threshold = 0.0 | 2025-06-26 15:21:58 
+info :     Node: feature = has_phone_number, threshold = 0.0 | 2025-06-26 15:21:58 
+info :       Node: feature = num_uppercase, threshold = 2.0 | 2025-06-26 15:21:58 
+info :         Node: feature = num_digits, threshold = 1.9430212730026317 | 2025-06-26 15:21:58 
+info :           Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :           Node: feature = num_digits, threshold = 2.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :         Node: feature = num_uppercase, threshold = 9.0 | 2025-06-26 15:21:58 
+info :           Node: feature = num_words, threshold = 35.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :           Leaf: class = 0.0 | 2025-06-26 15:21:58 
+info :       Leaf: class = 1.0 | 2025-06-26 15:21:58 
+info :     Node: feature = num_words, threshold = 35.0 | 2025-06-26 15:21:59 
+info :       Node: feature = has_phone_number, threshold = 0.0 | 2025-06-26 15:21:59 
+info :         Node: feature = num_digits, threshold = 2.0 | 2025-06-26 15:21:59 
+info :           Node: feature = num_uppercase, threshold = 6.0 | 2025-06-26 15:21:59 
+info :             Leaf: class = 1.0 | 2025-06-26 15:21:59 
+info :             Leaf: class = 0.0 | 2025-06-26 15:21:59 
+info :           Node: feature = num_uppercase, threshold = 1.0 | 2025-06-26 15:21:59 
+info :             Leaf: class = 1.0 | 2025-06-26 15:21:59 
+info :             Leaf: class = 1.0 | 2025-06-26 15:21:59 
+info :         Leaf: class = 1.0 | 2025-06-26 15:21:59 
+info :       Leaf: class = 0.0 | 2025-06-26 15:21:59 
+info : Feature 'num_uppercase' used 7 times in splits | 2025-06-26 15:22:00 
+info : Feature 'num_digits' used 6 times in splits | 2025-06-26 15:22:00 
+info : Feature 'num_words' used 4 times in splits | 2025-06-26 15:22:00 
+info : Feature 'has_phone_number' used 3 times in splits | 2025-06-26 15:22:00 
+info : Feature 'has_keyword' used 3 times in splits | 2025-06-26 15:22:00 
+info : Feature 'num_exclamations' used 2 times in splits | 2025-06-26 15:22:00 
+info : Feature 'count_suspicious_bigrams' used 1 times in splits | 2025-06-26 15:22:00 
+info : Feature 'has_question_mark' used 1 times in splits | 2025-06-26 15:22:00 
+info : Feature 'ends_with_stop' used 1 times in splits | 2025-06-26 15:22:00 
+info : Predicting on test set.. | 2025-06-26 15:22:00 
+info : Accuracy: 0.9690
+Classification report:  | 2025-06-26 15:22:02 
+info :               precision    recall  f1-score   support
+
+         ham       0.97      0.99      0.98      1054
+        spam       0.94      0.86      0.90       206
+
+    accuracy                           0.97      1260
+   macro avg       0.96      0.93      0.94      1260
+weighted avg       0.97      0.97      0.97      1260
+ | 2025-06-26 15:22:02 

@@ -1,0 +1,10 @@
+# Ignore model outputs and logs
+*.ckpt
+*.pth
+__pycache__/
+*.pyc
+
+# VS Code workspace
+.vscode/
+.env
+*.env

@@ -45,3 +45,17 @@ def to_ndarray(X):
         return X.toarray()
     else:
         return X
+
+def convert_binary_labels_to_minus_plus(y):
+    """
+    Converts binary labels in y to -1 and 1 format if necessary.
+    Assumes binary labels (e.g., 0/1, True/False, or already -1/1).
+    """
+    y = np.array(y)
+    unique_values = np.unique(y)
+    if set(unique_values) == {-1, 1}:
+        return y
+    elif set(unique_values) == {0, 1}:
+        return np.where(y == 0, -1, 1)
+    else:
+        raise ValueError(f"Unexpected label values: {unique_values}. Expected binary values.")
