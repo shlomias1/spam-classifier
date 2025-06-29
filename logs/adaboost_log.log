@@ -1,0 +1,14 @@
+info : Starting AdaBoost training... | 2025-06-29 08:57:19 
+info : Fitting AdaBoode model... | 2025-06-29 08:57:19 
+info : Predicting on test set... | 2025-06-29 09:08:24 
+info : Accuracy: 0.9635 | 2025-06-29 09:08:24 
+info : Classification report:
+              precision    recall  f1-score   support
+
+         ham       0.98      0.98      0.98      1054
+        spam       0.88      0.90      0.89       206
+
+    accuracy                           0.96      1260
+   macro avg       0.93      0.94      0.93      1260
+weighted avg       0.96      0.96      0.96      1260
+ | 2025-06-29 09:08:24 

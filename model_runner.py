@@ -68,12 +68,12 @@ def run_adaboost_pipeline(X_train, X_test, y_train, y_test, target_names):
     model.fit(X_train, y_train_boost)
     _create_log("Predicting on test set...", "info", "adaboost_log.log")
     y_pred = model.predict(X_test)
-    acc = accuracy_score(y_test, y_pred)
+    acc = accuracy_score(y_test_boost, y_pred)
     _create_log(f"Accuracy: {acc:.4f}", "info", "adaboost_log.log")
     _create_log("Classification report:\n" +
-                classification_report(y_test, y_pred, target_names=target_names or ["class -1", "class 1"]),
+                classification_report(y_test_boost, y_pred, target_names=target_names or ["class -1", "class 1"]),
                 "info", "adaboost_log.log")
     print(classification_report(y_test_boost, y_pred))
-    save_confusion_matrix(y_test, y_pred, labels=target_names or ["class -1", "class 1"],
-                          path="confusion_matrix_ADABOOST.png")
+    save_confusion_matrix(y_test_boost, y_pred, labels=target_names or ["class -1", "class 1"],
+                          path="confusion_matrix_AdaBoost.png")
     save_model(model, "models/adaboost_model.pkl")

@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import roc_curve, auc
 import os
 from config import IMAGES_DIR
+from utils.logger import _create_log
+from processing import convert_binary_labels_to_minus_plus, convert_minus_plus_to_binary
 
 def save_confusion_matrix(y_true, y_pred, labels, path):
     os.makedirs(IMAGES_DIR, exist_ok=True)
@@ -75,6 +78,28 @@ def plot_max_features_tuning(max_features_range, precisions, recalls, f1_scores,
     plt.ylabel('Score')
     plt.title('Random Forest Performance vs. Number of Features')
     plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(full_path)
+    plt.close()
+
+def plot_roc_curves_comparison(models_outputs, y_test, output_path = "roc_comparison.png"):
+    os.makedirs(IMAGES_DIR, exist_ok=True)
+    full_path = os.path.join(IMAGES_DIR, output_path)
+    plt.figure(figsize=(10, 8))
+    for name, y_pred, y_score, label_type in models_outputs:
+        if label_type == "plusminus":
+            y_test_adj = convert_minus_plus_to_binary(y_test)
+        else:
+            y_test_adj = y_test
+        fpr, tpr, _ = roc_curve(y_test_adj, y_score)
+        roc_auc = auc(fpr, tpr)
+        plt.plot(fpr, tpr, label=f"{name} (AUC = {roc_auc:.2f})")
+    plt.plot([0, 1], [0, 1], 'k--', label="Random Guess")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title("ROC Curves Comparison")
+    plt.legend(loc="lower right")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(full_path)

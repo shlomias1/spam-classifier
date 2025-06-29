@@ -55,6 +55,21 @@ class RandomForestClassifier:
         final_preds = np.round(np.mean(all_preds, axis=0)).astype(int)
         return final_preds
 
+    def predict_proba(self, X):
+        """
+        Return probability estimates for the test vector X.
+        Assumes binary classification with outputs in {0, 1}.
+        """
+        all_preds = []
+        for tree, feature_indices in self.trees:
+            X_input = X if feature_indices is None else X[:, feature_indices]
+            preds = tree.predict(X_input)
+            all_preds.append(preds)
+        all_preds = np.array(all_preds)
+        proba_class_1 = np.mean(all_preds, axis=0)  
+        proba_class_0 = 1 - proba_class_1            
+        return np.vstack((proba_class_0, proba_class_1)).T
+
     def compute_feature_importance(self):
         importance_counter = Counter()
         for tree, feature_indices in self.trees:

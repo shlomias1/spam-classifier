@@ -59,3 +59,6 @@ def convert_binary_labels_to_minus_plus(y):
         return np.where(y == 0, -1, 1)
     else:
         raise ValueError(f"Unexpected label values: {unique_values}. Expected binary values.")
+
+def convert_minus_plus_to_binary(y):
+    return (y == 1).astype(int)

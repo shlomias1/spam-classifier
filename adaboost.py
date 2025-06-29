@@ -11,11 +11,9 @@ class AdaBoost:
         n_samples, n_features = X.shape
         # Initialize weights
         w = np.full(n_samples, (1 / n_samples))
-
         for _ in range(self.n_estimators):
             stump = DecisionStump()
             min_error = float('inf')
-
             # Scan on each feature and threshold
             for feature_i in range(n_features):
                 feature_values = X[:, feature_i]
@@ -48,3 +46,11 @@ class AdaBoost:
     def predict(self, X):
         clf_preds = [model.alpha * model.predict(X) for model in self.models]
         return np.sign(np.sum(clf_preds, axis=0))
+
+    def decision_function(self, X):
+        """
+        Returns the real-valued output of the ensemble before applying sign().
+        Useful for ROC and AUC evaluations.
+        """
+        clf_preds = [model.alpha * model.predict(X) for model in self.models]
+        return np.sum(clf_preds, axis=0)

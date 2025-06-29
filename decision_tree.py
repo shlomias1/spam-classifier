@@ -16,8 +16,26 @@ class DecisionTreeClassifier:
             X = X.toarray()
         self.tree_ = self._build_tree(X, y)
 
+    def _predict_one(self, x, tree):
+        if tree['leaf']:
+            return tree['class']
+        if x[tree['feature']] <= tree['threshold']:
+            return self._predict_one(x, tree['left'])
+        else:
+            return self._predict_one(x, tree['right'])
+        
     def predict(self, X):
         return np.array([self._predict_one(x, self.tree_) for x in X])
+
+    def predict_proba(self, X):
+        """
+        Returns probability estimates for the test vector X.
+        For binary classification, returns [[p(class 0), p(class 1)], ...]
+        """
+        preds = self.predict(X)
+        proba_class_1 = preds.astype(float)
+        proba_class_0 = 1 - proba_class_1
+        return np.vstack((proba_class_0, proba_class_1)).T
 
     def _entropy(self, y):
         _, counts = np.unique(y, return_counts=True)
@@ -70,14 +88,6 @@ class DecisionTreeClassifier:
             'left': self._build_tree(X_left, y_left, depth + 1),
             'right': self._build_tree(X_right, y_right, depth + 1)
         }
-
-    def _predict_one(self, x, tree):
-        if tree['leaf']:
-            return tree['class']
-        if x[tree['feature']] <= tree['threshold']:
-            return self._predict_one(x, tree['left'])
-        else:
-            return self._predict_one(x, tree['right'])
 
     def print_tree(self, feature_names,tree=None, depth=0):
         if tree is None:
