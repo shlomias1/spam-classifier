@@ -7,20 +7,20 @@ from config import SELECTED_FEATURES
 class RandomForestClassifier:
     def __init__(self, n_estimators=10, max_depth=5, min_samples_split=2, max_features=None, verbose=False):
         self.n_estimators = n_estimators
-        self.max_depth = max_depth
+        self.max_depth = max_depth 
         self.min_samples_split = min_samples_split
         self.max_features = max_features
-        self.verbose = verbose
+        self.verbose = verbose 
         self.trees = []
 
     def fit(self, X, y):
         self.trees = []
         n_samples, n_features = X.shape
         for i in range(self.n_estimators):
-            indices = np.random.choice(n_samples, size=n_samples, replace=True)
+            indices = np.random.choice(n_samples, size=n_samples, replace=True) 
             X_sample = X[indices]
             y_sample = np.array(y)[indices]
-            if self.max_features is None:
+            if self.max_features is None: 
                 max_feats = n_features
             elif self.max_features == "sqrt":
                 max_feats = int(np.sqrt(n_features))
@@ -56,10 +56,6 @@ class RandomForestClassifier:
         return final_preds
 
     def predict_proba(self, X):
-        """
-        Return probability estimates for the test vector X.
-        Assumes binary classification with outputs in {0, 1}.
-        """
         all_preds = []
         for tree, feature_indices in self.trees:
             X_input = X if feature_indices is None else X[:, feature_indices]

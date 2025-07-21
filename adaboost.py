@@ -3,14 +3,14 @@ from decision_stump import DecisionStump
 
 class AdaBoost:
     def __init__(self, n_estimators=50):
-        self.n_estimators = n_estimators
-        self.alphas = []
-        self.models = []
+        self.n_estimators = n_estimators 
+        self.alphas = [] 
+        self.models = [] 
 
     def fit(self, X, y):
         n_samples, n_features = X.shape
         # Initialize weights
-        w = np.full(n_samples, (1 / n_samples))
+        w = np.full(n_samples, (1 / n_samples)) 
         for _ in range(self.n_estimators):
             stump = DecisionStump()
             min_error = float('inf')
@@ -18,8 +18,8 @@ class AdaBoost:
             for feature_i in range(n_features):
                 feature_values = X[:, feature_i]
                 thresholds = np.unique(feature_values)
-                for threshold in thresholds:
-                    for polarity in [1, -1]:
+                for threshold in thresholds: 
+                    for polarity in [1, -1]: 
                         predictions = np.ones(n_samples)
                         if polarity == 1:
                             predictions[feature_values < threshold] = -1
@@ -35,10 +35,10 @@ class AdaBoost:
                             min_error = error
             # Expertise calculation
             EPS = 1e-10
-            stump.alpha = 0.5 * np.log((1 - min_error + EPS) / (min_error + EPS))
+            stump.alpha = 0.5 * np.log((1 - min_error + EPS) / (min_error + EPS)) 
             # Update weights
             predictions = stump.predict(X)
-            w *= np.exp(-stump.alpha * y * predictions)
+            w *= np.exp(-stump.alpha * y * predictions) 
             w /= np.sum(w)  # Normalization
             self.models.append(stump)
             self.alphas.append(stump.alpha)
@@ -46,11 +46,7 @@ class AdaBoost:
     def predict(self, X):
         clf_preds = [model.alpha * model.predict(X) for model in self.models]
         return np.sign(np.sum(clf_preds, axis=0))
-
+    
     def decision_function(self, X):
-        """
-        Returns the real-valued output of the ensemble before applying sign().
-        Useful for ROC and AUC evaluations.
-        """
         clf_preds = [model.alpha * model.predict(X) for model in self.models]
         return np.sum(clf_preds, axis=0)

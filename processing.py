@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from scipy.sparse import hstack, csr_matrix, issparse
+from scipy.sparse import hstack, issparse
 import numpy as np
 from imblearn.over_sampling import SMOTE
 
@@ -35,10 +35,10 @@ def split(data, X_all):
     )
     return X_train, X_test, y_train, y_test
 
-def smote(X_train, y_train): 
-    smote = SMOTE(random_state=42)
-    X_train, y_train = smote.fit_resample(X_train, y_train)
-    return X_train, y_train
+def smote(X_train, y_train, sampling_strategy='auto', random_state=42):
+    smote = SMOTE(sampling_strategy=sampling_strategy, random_state=random_state)
+    X_res, y_res = smote.fit_resample(X_train, y_train)
+    return X_res, y_res
 
 def to_ndarray(X):
     if not isinstance(X, np.ndarray):
@@ -47,10 +47,6 @@ def to_ndarray(X):
         return X
 
 def convert_binary_labels_to_minus_plus(y):
-    """
-    Converts binary labels in y to -1 and 1 format if necessary.
-    Assumes binary labels (e.g., 0/1, True/False, or already -1/1).
-    """
     y = np.array(y)
     unique_values = np.unique(y)
     if set(unique_values) == {-1, 1}:

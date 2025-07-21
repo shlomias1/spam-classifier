@@ -1,10 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier as SklearnDT
 from sklearn.metrics import accuracy_score, classification_report
-import matplotlib.pyplot as plt
-import seaborn as sns
 from utils.logger import _create_log
 from utils.plotting import save_confusion_matrix
-import numpy as np
 import config
 from data_io import save_model
 from processing import to_ndarray

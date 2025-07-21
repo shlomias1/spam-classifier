@@ -1,7 +1,5 @@
-import pandas as pd
 import string
 import re
-import numpy as np
 
 from data_io import load_data
 import config
